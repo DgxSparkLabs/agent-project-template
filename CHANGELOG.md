@@ -1,8 +1,8 @@
 # Changelog
 
-One paragraph per milestone. Most recent first. See `git log` for full history.
+One paragraph per milestone. Most recent first. Link to commits. See `git log` for full history.
 
 ---
 
-### Initial setup (DATE)
+### Initial setup (DATE) — `abc1234`
 Project created from agent-project-template.

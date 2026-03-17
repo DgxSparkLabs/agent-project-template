@@ -42,4 +42,8 @@ echo "==============================="
 echo ""
 echo "Next: update HANDOFF.md if behavior changed. Add PITFALLS.md entries for any bugs fixed."
 
+# Touch sentinel so pre-commit hook knows tests were run
+SENTINEL="$(cd "$(dirname "$0")/.." && pwd)/.githooks/.last_test_run"
+touch "$SENTINEL" 2>/dev/null || true
+
 [ "$FAIL" -eq 0 ] && exit 0 || exit 1

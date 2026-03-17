@@ -4,13 +4,15 @@ This file explains the reasoning behind the project structure. Not rules to foll
 
 ---
 
-## Three documents, not ten
+## Three documents, not ten (and why there are five)
 
-Every project has `AGENTS.md` (rules), `HANDOFF.md` (current state), and `CHANGELOG.md` (history). That's it.
+Every project has three core documents: `AGENTS.md` (rules), `HANDOFF.md` (current state), and `CHANGELOG.md` (history). These are the working documents -- updated every session, read every session.
 
-We learned this the hard way. A project accumulated `START_HERE.md`, `ROADMAP.md`, `PROGRESS.md` (86K lines), `.tasks/remaining.md`, `.tasks/scope.md`, and 7 individual task files. `START_HERE.md` existed solely to warn you which other documents were stale. When you need a document to explain which documents to trust, you have too many documents.
+Two more exist but serve different roles. `PITFALLS.md` is a structured append-only log (symptom/cause/fix/commit) that captures debugging experience -- it grows with the project but doesn't overlap with the three core docs. `WHY.md` is a read-once philosophy document that never needs updating. Neither is a "fourth tier" of documentation. They're tools with specific jobs that don't fit the three-tier model and shouldn't be forced into it.
 
-Three files, three roles, no overlap. If you're about to create a fourth file, put the content in one of the three.
+We learned the "no more documents" rule the hard way. A project accumulated `START_HERE.md`, `ROADMAP.md`, `PROGRESS.md` (86K lines), `.tasks/remaining.md`, `.tasks/scope.md`, and 7 individual task files. `START_HERE.md` existed solely to warn you which other documents were stale. When you need a document to explain which documents to trust, you have too many documents.
+
+The test is simple: does this document have a clear owner, a clear update trigger, and a job that the three core docs can't do? If yes, it earns its place. If no, put the content in one of the three.
 
 ## HANDOFF.md is edited, not appended
 
@@ -24,9 +26,11 @@ The test runner, the pre-commit hook, and the baselines file exist in this templ
 
 Every project that adds testing after the features are built has the same experience: the test infrastructure never catches up. You're always testing yesterday's code. But if the test runner exists from day one, every feature gets a test because the infrastructure is already there and running it is one command.
 
-## The pre-commit hook is a nudge, not a wall
+## The hooks are nudges, not walls
 
-The hook checks that the build compiles without warnings and that tests were run. It warns about stale test results. It doesn't block everything -- an agent can still commit documentation changes without running the full suite.
+Two hooks, two jobs. The pre-commit hook blocks on build failures and warnings, and nudges about stale test results (warns but doesn't block). The pre-push hook runs the test suite and blocks if anything fails.
+
+This split is deliberate. A commit with stale tests is recoverable -- you'll catch it before push. But pushing broken tests to a shared branch wastes everyone's time.
 
 We could make it stricter. But strict hooks get bypassed (`--no-verify`). A nudge that's occasionally annoying is better than a wall that gets circumvented.
 

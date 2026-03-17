@@ -11,5 +11,8 @@ build/
 # OS
 .DS_Store
 
+# Hooks state
+.githooks/.last_test_run
+
 # Logs
 *.log

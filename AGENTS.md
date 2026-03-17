@@ -42,6 +42,7 @@ COMMAND_HERE
 ## Testing
 
 ```bash
+git config core.hooksPath .githooks   # once, after clone/copy
 cd test && ./run_tests.sh
 ```
 

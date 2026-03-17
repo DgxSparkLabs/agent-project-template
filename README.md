@@ -22,7 +22,8 @@ git config core.hooksPath .githooks
 ├── WHY.md              # Philosophy — why we work this way (read once)
 ├── PITFALLS.md         # Lessons learned — symptom, cause, fix (grows with the project)
 ├── .githooks/
-│   └── pre-commit      # Zero-warning build gate + test result check
+│   ├── pre-commit      # Zero-warning build gate + test freshness nudge
+│   └── pre-push        # Test suite must pass before push
 └── test/
     ├── run_tests.sh    # Automated test runner (PASS/FAIL/SKIP)
     └── baselines.json  # Performance thresholds
