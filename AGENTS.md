@@ -1,6 +1,12 @@
 # PROJECT_NAME — Project Rules
 
-Project-specific conventions. General methodology is in `~/.config/cognition/AGENTS.md`.
+> **You don't have memory. These files do.** Everything you learn this session
+> is lost when it ends. Write to `HANDOFF.md` (current state), `PITFALLS.md`
+> (lessons learned), and `CHANGELOG.md` (history). These files are your memory.
+> The question isn't "did I complete the task?" — it's "would the next agent
+> thank me for how I left this project?"
+
+Read in order: `HANDOFF.md`, `PITFALLS.md`, this file. For reasoning: `WHY.md`.
 
 ---
 
