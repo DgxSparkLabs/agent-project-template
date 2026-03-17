@@ -19,17 +19,25 @@ git config core.hooksPath .githooks
 ├── AGENTS.md           # Project rules and conventions (max 200 lines)
 ├── HANDOFF.md          # Current state (updated in-place every commit)
 ├── CHANGELOG.md        # History (append-only, one paragraph per milestone)
+├── WHY.md              # Philosophy — why we work this way (read once)
+├── PITFALLS.md         # Lessons learned — symptom, cause, fix (grows with the project)
 ├── .githooks/
-│   └── pre-commit      # Zero-warning build gate
+│   └── pre-commit      # Zero-warning build gate + test result check
 └── test/
     ├── run_tests.sh    # Automated test runner (PASS/FAIL/SKIP)
     └── baselines.json  # Performance thresholds
 ```
 
+## Reading order for new agents
+
+1. **HANDOFF.md** — what works, how to build, how to test, what to work on
+2. **PITFALLS.md** — what not to do and why
+3. **AGENTS.md** — project-specific conventions
+4. **WHY.md** — the reasoning behind the structure (read once, understand the principles)
+
 ## Methodology
 
-See `~/.config/cognition/AGENTS.md` for the full methodology:
-- Document lifecycle (3 tiers)
-- Verification ladder (5 layers)
-- Task formation rules
-- Commit loop
+The structure in this template encodes the methodology. The files are already here — you fill them in. The hooks are already wired — they just run. The test runner is ready — you add tests. The path of least resistance leads to good behavior.
+
+For the full methodology: `~/.config/cognition/AGENTS.md`
+For the reasoning: `WHY.md`
