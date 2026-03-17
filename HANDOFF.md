@@ -43,3 +43,23 @@ BUILD_COMMANDS
 ## Future work
 
 1. NEXT_ITEM
+
+---
+
+## How to resume this project
+
+Copy this prompt to start a new agent session:
+
+```
+Read HANDOFF.md and PITFALLS.md. Run the tests. For each future work
+item (in priority order):
+1. Investigate — read the relevant code, understand why it's a problem
+2. Plan — break into tasks with function names, pass conditions, and
+   dependency order. Write them to the todo list.
+3. Implement — one task at a time. Test after each. Commit after each.
+4. Update HANDOFF.md. Add PITFALLS.md entries for any bugs found.
+
+If you discover improvements not on the list, apply the same 4 steps.
+If you hit friction, fix the process not just the symptom.
+Keep going until the todo list is empty.
+```
