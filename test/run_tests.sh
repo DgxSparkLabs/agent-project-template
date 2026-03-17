@@ -39,5 +39,7 @@ echo ""
 echo "==============================="
 echo -e "  ${GREEN}PASS: $PASS${NC}  ${RED}FAIL: $FAIL${NC}  ${YELLOW}SKIP: $SKIP${NC}"
 echo "==============================="
+echo ""
+echo "Next: update HANDOFF.md if behavior changed. Add PITFALLS.md entries for any bugs fixed."
 
 [ "$FAIL" -eq 0 ] && exit 0 || exit 1

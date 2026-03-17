@@ -1,5 +1,7 @@
 # HANDOFF.md — Current state of the project
 
+> **New here?** Read in order: this file, then `PITFALLS.md`, then `AGENTS.md`. For the reasoning: `WHY.md`.
+
 Last updated: DATE. If anything here contradicts reality, fix this file.
 
 ---
