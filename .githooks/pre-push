@@ -8,7 +8,7 @@ TEST_RUNNER="test/run_tests.sh"
 
 if [ -x "$TEST_RUNNER" ]; then
     echo "Running tests before push..."
-    if ! cd test && ./run_tests.sh; then
+    if ! (cd test && ./run_tests.sh); then
         echo "ERROR: tests failed. Fix before pushing."
         exit 1
     fi

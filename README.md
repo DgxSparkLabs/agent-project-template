@@ -40,5 +40,5 @@ git config core.hooksPath .githooks
 
 The structure in this template encodes the methodology. The files are already here — you fill them in. The hooks are already wired — they just run. The test runner is ready — you add tests. The path of least resistance leads to good behavior.
 
-For the full methodology: `~/.config/cognition/AGENTS.md`
+For the full methodology: `~/.config/devin/AGENTS.md`
 For the reasoning: `WHY.md`
