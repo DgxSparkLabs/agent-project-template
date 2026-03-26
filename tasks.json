@@ -1,0 +1,8 @@
+[
+  {
+    "id": 1,
+    "description": "TASK_DESCRIPTION",
+    "acceptance": "CONCRETE_PASS_CONDITION",
+    "passes": false
+  }
+]

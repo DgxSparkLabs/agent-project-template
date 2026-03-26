@@ -1,12 +1,12 @@
 # PROJECT_NAME — Project Rules
 
 > **You don't have memory. These files do.** Everything you learn this session
-> is lost when it ends. Write to `HANDOFF.md` (current state), `PITFALLS.md`
-> (lessons learned), and `CHANGELOG.md` (history). These files are your memory.
-> The question isn't "did I complete the task?" — it's "would the next agent
-> thank me for how I left this project?"
+> is lost when it ends. Write to `HANDOFF.md` (current state) and `PITFALLS.md`
+> (lessons learned). History lives in `git log`. The question isn't "did I
+> complete the task?" — it's "would the next agent thank me for how I left
+> this project?"
 
-Read in order: `HANDOFF.md`, `PITFALLS.md`, this file. For reasoning: `WHY.md`.
+Read first: `HANDOFF.md`, then `PITFALLS.md`, then this file.
 
 ---
 
@@ -20,6 +20,35 @@ Read in order: `HANDOFF.md`, `PITFALLS.md`, this file. For reasoning: `WHY.md`.
 COMMAND_HERE
 # Expected outcome: EXPECTED_OUTCOME
 ```
+
+**"Done" checklist:**
+- [ ] Tests pass? <BEGIN_TESTS_COMMAND>
+- [ ] Verified working (not just tests — actually run it)
+- [ ] `HANDOFF.md` updated (if behavior or commands changed)
+- [ ] `PITFALLS.md` entry added (if a bug was fixed or non-obvious behavior discovered)
+- [ ] `tasks.json` updated (`"passes": true` for completed tasks)
+- [ ] Open questions resolved or written to `HANDOFF.md`
+- [ ] `docs/` updated (if behavior, setup, or usage changed)
+- [ ] Changes committed
+
+**Task tracking:** `tasks.json` — structured JSON with pass/fail status. Pick the
+first `"passes": false` task, implement it, verify it, flip to `true`, commit.
+Do exactly what the task asks. No more. Do not edit descriptions or remove tasks.
+Do not work on more than one at a time.
+
+**Open questions:** When you hit something ambiguous — unclear requirements, multiple
+valid approaches, missing context — ask the user with your suggested solution. Don't
+assume silently. If the session ends with unresolved questions, add them to "Open
+questions" in `HANDOFF.md` so the next session can address them.
+
+---
+
+## When stuck
+
+Separate what you know from what you assume. If the assumption list is non-empty,
+investigate before acting. Fix bottom-up — if you can't explain *why* something
+failed, you haven't found the cause yet. After 3 failed attempts at the same
+approach, try a different angle. Record what you tried in `PITFALLS.md`.
 
 ---
 
@@ -42,8 +71,8 @@ COMMAND_HERE
 ## Testing
 
 ```bash
-git config core.hooksPath .githooks   # once, after clone/copy
-cd test && ./run_tests.sh
+bash init.sh                          # bootstrap environment + install hooks
+cd test && ./run_tests.sh             # run test suite
 ```
 
 ### Performance baselines
@@ -54,6 +83,13 @@ METRIC_2: VALUE
 
 ---
 
-## Known Limitations
+## Documentation for Humans
 
-- LIMITATION_1
+Humans will read this project and try to understand it. Document in `docs/`. The
+audience is someone who has never seen this project. Explain what things do and
+why, not just how to run them. Before each command, explain what it does. Before
+each expected output, explain what the values mean. If you'd need to ask "what
+does this do?" reading it, the doc is incomplete.
+
+Every command in a tutorial must have been executed and verified. Expected output
+must be copy-pasted from actual runs, not guessed.

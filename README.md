@@ -18,9 +18,12 @@ git config core.hooksPath .githooks
 ```
 ├── AGENTS.md           # Project rules and conventions (max 200 lines)
 ├── HANDOFF.md          # Current state (updated in-place every commit)
-├── CHANGELOG.md        # History (append-only, one paragraph per milestone)
 ├── WHY.md              # Philosophy — why we work this way (read once)
 ├── PITFALLS.md         # Lessons learned — symptom, cause, fix (grows with the project)
+├── tasks.json          # Task queue — structured JSON with pass/fail status
+├── init.sh             # Environment bootstrap — build, run, verify (one command)
+├── docs/
+│   └── TEMPLATE.md     # Structure for human-facing documentation
 ├── .githooks/
 │   ├── pre-commit      # Zero-warning build gate + test freshness nudge
 │   └── pre-push        # Test suite must pass before push
@@ -31,10 +34,11 @@ git config core.hooksPath .githooks
 
 ## Reading order for new agents
 
-1. **HANDOFF.md** — what works, how to build, how to test, what to work on
+1. **HANDOFF.md** — what works, what to verify, how to resume
 2. **PITFALLS.md** — what not to do and why
 3. **AGENTS.md** — project-specific conventions
-4. **WHY.md** — the reasoning behind the structure (read once, understand the principles)
+4. **tasks.json** — the task queue (pick first `"passes": false`)
+5. **WHY.md** — the reasoning behind the structure (read once, understand the principles)
 
 ## Methodology
 

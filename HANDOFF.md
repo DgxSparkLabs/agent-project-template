@@ -1,23 +1,21 @@
 # HANDOFF.md — Current state of the project
 
-> **New here?** Read in order: this file, then `PITFALLS.md`, then `AGENTS.md`. For the reasoning: `WHY.md`.
+> **New here?** Read this file, then `PITFALLS.md`, then `AGENTS.md`.
 
 Last updated: DATE. If anything here contradicts reality, fix this file.
 
 ---
 
-## What is this?
-
-DESCRIBE_PROJECT_IN_2_SENTENCES
-
 ## Before you write any code
 
 ```bash
-# Pre-flight checks:
-# 1. Check environment
-# 2. Build
-# 3. Run tests
+bash init.sh              # bootstrap environment, build, verify
+cd test && ./run_tests.sh # confirm everything is green
+git log --oneline -10     # understand recent changes
+cat tasks.json | head -40 # see what's next
 ```
+
+If init.sh or tests fail, fix the failure before doing anything else.
 
 ---
 
@@ -28,21 +26,16 @@ DESCRIBE_PROJECT_IN_2_SENTENCES
 
 ---
 
-## Build & deploy
-
-```bash
-BUILD_COMMANDS
-```
-
----
-
 ## Known limitations
 
 - LIMITATION_1
 
-## Future work
+---
 
-1. NEXT_ITEM
+## Open questions
+
+<!-- When you hit ambiguity, ask the user. If unresolved by session end, add here.
+     Format: question + your suggested solution. Remove when resolved. -->
 
 ---
 
@@ -51,15 +44,8 @@ BUILD_COMMANDS
 Copy this prompt to start a new agent session:
 
 ```
-Read HANDOFF.md and PITFALLS.md. Run the tests. For each future work
-item (in priority order):
-1. Investigate — read the relevant code, understand why it's a problem
-2. Plan — break into tasks with function names, pass conditions, and
-   dependency order. Write them to the todo list.
-3. Implement — one task at a time. Test after each. Commit after each.
-4. Update HANDOFF.md. Add PITFALLS.md entries for any bugs found.
-
-If you discover improvements not on the list, apply the same 4 steps.
-If you hit friction, fix the process not just the symptom.
-Keep going until the todo list is empty.
+Read HANDOFF.md, PITFALLS.md, and AGENTS.md.
+Run the "Before you write any code" steps. Fix any failures first.
+Then pick the next task from tasks.json and follow the task tracking
+rules in AGENTS.md.
 ```

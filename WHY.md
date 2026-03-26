@@ -4,21 +4,23 @@ This file explains the reasoning behind the project structure. Not rules to foll
 
 ---
 
-## Three documents, not ten (and why there are five)
+## Two documents, not ten (and why there are four)
 
-Every project has three core documents: `AGENTS.md` (rules), `HANDOFF.md` (current state), and `CHANGELOG.md` (history). These are the working documents -- updated every session, read every session.
+Every project has two core documents: `AGENTS.md` (rules) and `HANDOFF.md` (current state). These are the working documents -- updated every session, read every session.
 
-Two more exist but serve different roles. `PITFALLS.md` is a structured append-only log (symptom/cause/fix/commit) that captures debugging experience -- it grows with the project but doesn't overlap with the three core docs. `WHY.md` is a read-once philosophy document that never needs updating. Neither is a "fourth tier" of documentation. They're tools with specific jobs that don't fit the three-tier model and shouldn't be forced into it.
+Two more exist but serve different roles. `PITFALLS.md` is a structured append-only log (symptom/cause/fix/commit) that captures debugging experience -- it grows with the project but doesn't overlap with the core docs. `WHY.md` is a read-once philosophy document that never needs updating. Neither is a "third tier" of documentation. They're tools with specific jobs that don't fit the two-tier model and shouldn't be forced into it.
+
+History lives in `git log`. We used to have a `CHANGELOG.md` but it duplicated what git already records. The useful bits (milestones, major changes) belong in commit messages, not a separate file that drifts out of sync.
 
 We learned the "no more documents" rule the hard way. A project accumulated `START_HERE.md`, `ROADMAP.md`, `PROGRESS.md` (86K lines), `.tasks/remaining.md`, `.tasks/scope.md`, and 7 individual task files. `START_HERE.md` existed solely to warn you which other documents were stale. When you need a document to explain which documents to trust, you have too many documents.
 
-The test is simple: does this document have a clear owner, a clear update trigger, and a job that the three core docs can't do? If yes, it earns its place. If no, put the content in one of the three.
+The test is simple: does this document have a clear owner, a clear update trigger, and a job that the core docs can't do? If yes, it earns its place. If no, put the content in one of them.
 
 ## HANDOFF.md is edited, not appended
 
 `HANDOFF.md` always reflects the current state. When something changes, you update it in-place. You don't add a note at the bottom saying "update: this section is now wrong."
 
-We had a progress file that grew to 86K lines because it was append-only. Nobody read it. The useful information was copied into other files. The original became dead weight. History belongs in `CHANGELOG.md` and `git log`. Current state belongs in `HANDOFF.md`. Don't mix them.
+We had a progress file that grew to 86K lines because it was append-only. Nobody read it. The useful information was copied into other files. The original became dead weight. History belongs in `git log`. Current state belongs in `HANDOFF.md`. Don't mix them.
 
 ## Tests before features
 
@@ -39,6 +41,18 @@ We could make it stricter. But strict hooks get bypassed (`--no-verify`). A nudg
 When you fix a bug or discover non-obvious behavior, you write a 4-line entry in `PITFALLS.md`: symptom, cause, fix, commit. The file grows naturally from the work.
 
 This exists because agents don't persist memory between sessions. An agent that spent 4 hours debugging an init recursion deadlock will lose that knowledge when the session ends. The next agent will hit the same deadlock and spend the same 4 hours. Unless the first agent wrote it down. The pitfall entry takes 30 seconds to write and saves hours for every future session.
+
+## JSON task tracking, not Markdown
+
+`tasks.json` uses structured JSON with a boolean `passes` field instead of Markdown bullets for task tracking. This came from Anthropic's long-running agent research: agents are less likely to corrupt JSON data than Markdown prose. A Markdown "Future work" list invites rewording, reordering, and deletion. A JSON array with `"passes": false` is treated as data — agents flip the boolean but leave the structure intact.
+
+The rule "do not edit descriptions or remove tasks" exists because the task list is a contract. If an agent can redefine what "done" means by editing a task description, the tracking loses its purpose.
+
+## init.sh is a script, not prose
+
+Build and environment setup commands used to live in HANDOFF.md as code blocks. An agent had to read the prose, extract the commands, and run them manually. `init.sh` is one command: `bash init.sh`. It eliminates the "agent spends time figuring out how to run the project" failure mode.
+
+The script also encodes a startup verification step. The last thing init.sh does is confirm the project is in a working state. If the previous agent left broken code, you find out immediately — before making it worse by starting new work.
 
 ## Pass conditions before implementation
 
