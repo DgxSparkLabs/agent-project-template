@@ -6,7 +6,7 @@ This file explains the reasoning behind the project structure. Not rules to foll
 
 ## Two documents, not ten (and why there are four)
 
-Every project has two core documents: `AGENTS.md` (rules) and `HANDOFF.md` (current state). These are the working documents -- updated every session, read every session.
+Every project has two core documents: `CLAUDE.md` (rules) and `HANDOFF.md` (current state). These are the working documents -- updated every session, read every session.
 
 Two more exist but serve different roles. `PITFALLS.md` is a structured append-only log (symptom/cause/fix/commit) that captures debugging experience -- it grows with the project but doesn't overlap with the core docs. `WHY.md` is a read-once philosophy document that never needs updating. Neither is a "third tier" of documentation. They're tools with specific jobs that don't fit the two-tier model and shouldn't be forced into it.
 

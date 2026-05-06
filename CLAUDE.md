@@ -6,7 +6,7 @@
 > complete the task?" — it's "would the next agent thank me for how I left
 > this project?"
 
-Read first: `HANDOFF.md`, then `PITFALLS.md`, then this file.
+Read first: `HANDOFF.md`, then `PITFALLS.md`, then this file. Or just run `/start`.
 
 ---
 
@@ -24,11 +24,12 @@ COMMAND_HERE
 **"Done" checklist:**
 - [ ] Tests pass? <BEGIN_TESTS_COMMAND>
 - [ ] Verified working (not just tests — actually run it)
-- [ ] `HANDOFF.md` updated (if behavior or commands changed)
-- [ ] `PITFALLS.md` entry added (if a bug was fixed or non-obvious behavior discovered)
+- [ ] `HANDOFF.md` updated (if behavior or commands changed) — `/handoff` does this
+- [ ] `PITFALLS.md` entry added (if a bug was fixed or non-obvious behavior discovered) — `/pitfall` does this
 - [ ] `tasks.json` updated (`"passes": true` for completed tasks)
 - [ ] Open questions resolved or written to `HANDOFF.md`
 - [ ] `docs/` updated (if behavior, setup, or usage changed)
+- [ ] `CLAUDE.md` updated (if conventions changed)
 - [ ] Changes committed
 
 **Task tracking:** `tasks.json` — structured JSON with pass/fail status. Pick the
@@ -66,6 +67,10 @@ approach, try a different angle. Record what you tried in `PITFALLS.md`.
 - Warnings: `-Wall -Wextra` or equivalent, zero warnings policy
 - ADD_MORE_CONVENTIONS
 
+Path-scoped rules live in `.claude/rules/` (e.g., `code-style.md`, `testing.md`).
+Add new ones there with a `paths:` glob in the frontmatter so they only load
+when relevant files are open.
+
 ---
 
 ## Testing
@@ -93,3 +98,24 @@ does this do?" reading it, the doc is incomplete.
 
 Every command in a tutorial must have been executed and verified. Expected output
 must be copy-pasted from actual runs, not guessed.
+
+---
+
+## Claude Code Workflow
+
+This template ships Claude-Code-native primitives that encode the methodology.
+
+**Skills** (`.claude/skills/<name>/SKILL.md`):
+- `/start` — read `HANDOFF.md`, `PITFALLS.md`, `CLAUDE.md`, `tasks.json`; run `init.sh` and tests; report state and the next task.
+- `/handoff <what changed>` — update `HANDOFF.md` in-place (never appends).
+- `/pitfall <description>` — append a 4-line entry to `PITFALLS.md`.
+
+**Subagent** (`.claude/agents/code-reviewer.md`): `code-reviewer` does a read-only review of uncommitted changes against this file and `PITFALLS.md`. Use it after substantial edits.
+
+**Output style** (`.claude/output-styles/methodology.md`): select `Methodology` via `/output-style` to keep these principles in the system prompt every turn.
+
+**Settings**: `.claude/settings.json` is committed (team-wide permissions, hooks). `.claude/settings.local.json` is gitignored (personal overrides). The `SessionStart` hook in `settings.json` prints the reading order at the top of every session.
+
+**Regeneration**: if the project is heavily restructured, run `/init` to have Claude propose a fresh `CLAUDE.md` based on the new state.
+
+Reference: https://code.claude.com/docs/en/memory

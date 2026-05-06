@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(bash init.sh)",
+      "Bash(./test/run_tests.sh)",
+      "Bash(cd test && ./run_tests.sh)",
+      "Bash(git config core.hooksPath .githooks)",
+      "Bash(git log:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Bash(git push --force:*)",
+      "Bash(git commit --no-verify:*)",
+      "Bash(git push --no-verify:*)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'Reading order: HANDOFF.md → PITFALLS.md → CLAUDE.md → tasks.json. Run `bash init.sh` before writing code, or use /start.'"
+          }
+        ]
+      }
+    ]
+  }
+}

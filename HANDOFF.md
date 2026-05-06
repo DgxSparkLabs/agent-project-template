@@ -1,6 +1,6 @@
 # HANDOFF.md — Current state of the project
 
-> **New here?** Read this file, then `PITFALLS.md`, then `AGENTS.md`.
+> **New here?** Read this file, then `PITFALLS.md`, then `CLAUDE.md`. Or run `/start`.
 
 Last updated: DATE. If anything here contradicts reality, fix this file.
 
@@ -44,8 +44,8 @@ If init.sh or tests fail, fix the failure before doing anything else.
 Copy this prompt to start a new agent session:
 
 ```
-Read HANDOFF.md, PITFALLS.md, and AGENTS.md.
+Read HANDOFF.md, PITFALLS.md, and CLAUDE.md (or run /start).
 Run the "Before you write any code" steps. Fix any failures first.
 Then pick the next task from tasks.json and follow the task tracking
-rules in AGENTS.md.
+rules in CLAUDE.md.
 ```

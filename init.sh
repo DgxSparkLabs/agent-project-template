@@ -29,3 +29,4 @@ git config core.hooksPath .githooks
 # cd test && ./run_tests.sh
 
 echo "init.sh: environment ready."
+echo "Tip: in Claude Code, run /start to read state and verify the project."
